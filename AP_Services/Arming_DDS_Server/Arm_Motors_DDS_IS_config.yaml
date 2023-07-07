@@ -17,7 +17,7 @@ systems:
 routes:
     dds_server:
         server: dds
-        clients: ros2
+        clients: [ros2]
 
 services:
     arm_motors: {

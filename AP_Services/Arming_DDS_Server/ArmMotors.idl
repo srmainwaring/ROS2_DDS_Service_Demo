@@ -1,0 +1,9 @@
+struct ArmMotors_Request
+{
+    boolean arm;
+};
+
+struct ArmMotors_Response
+{
+    boolean result;
+};

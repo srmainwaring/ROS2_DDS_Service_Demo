@@ -15,8 +15,15 @@
 ### Terminal 1 (XRCE-Agent)
 - Run XRCE Agent using the following command `cd /usr/local/bin && MicroXRCEAgent udp4 -p 2019`
 ### Terminal 2 (XRCE-Client)
-- In the **Arming_DDS_Server** folder, compile the Server file as `g++ Arm_Motors_DDS_Server.cpp -lmicrocdr -lmicroxrcedds_client`
-- Run the Server script as  `./a.out 127.0.0.1 2019`
+- In the **Arming_DDS_Server** folder, compile the Server file as
+
+  ```bash
+  $ mkdir build && cd build
+  $ cmake ..
+  $ make
+  ```
+
+- Run the Server script as  `./ArmMotorsMicro 127.0.0.1 2019`
 - There is a third flag : `armable` , which has the following values : 
     - **1 (default)**  : to mimic conditions when arming motors is allowed
     - **0** : to mimic conditions when arming is not allowed
