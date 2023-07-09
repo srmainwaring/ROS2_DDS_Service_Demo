@@ -3,9 +3,6 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project("ap_services")
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 # Find requirements
 find_package(fastcdr REQUIRED)
 find_package(fastrtps REQUIRED)
