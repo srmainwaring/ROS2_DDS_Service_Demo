@@ -122,7 +122,7 @@ int main(
     replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
     const char* replier_xml = "<dds>"
             "<replier profile_name=\"ArmMotors_Replier\""
-            "service_name=\"ArmMotorsService\""
+            "service_name=\"ArmMotors_Service\""
             "request_type=\"ArmMotors_Request\""
             "reply_type=\"ArmMotors_Response\">"
             "</replier>"

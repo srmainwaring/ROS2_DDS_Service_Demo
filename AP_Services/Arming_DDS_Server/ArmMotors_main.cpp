@@ -71,7 +71,7 @@ int main(
 
     OperationMode mode(OperationMode::INVALID);
     uint32_t count = 10;
-    std::string service_name("ArmMotorsService");
+    std::string service_name("ArmMotors_Service");
     const uint32_t sleep = 100;
     eprosima::fastdds::dds::DomainId_t domain_id(0);
 
@@ -138,7 +138,7 @@ int main(
                 std::cout << "\t-m/--mode\tChoose between 'server' or 'client'" << std::endl;
                 std::cout << "\t-d/--domain\t(optional) Set a custom Domain ID (default: 0)" << std::endl;
                 std::cout << "\t-c/--count\t(optional) Make a specific number of service client requests (default: 10)" << std::endl;
-                std::cout << "\t-n/--service_name\t(optional) Request/reply to/from a specific service (default: ArmMotorsService)" << std::endl;
+                std::cout << "\t-n/--service_name\t(optional) Request/reply to/from a specific service (default: ArmMotors_Service)" << std::endl;
                 return 0;
             }
             default:

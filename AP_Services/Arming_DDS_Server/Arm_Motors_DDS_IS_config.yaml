@@ -26,7 +26,7 @@ services:
         route: dds_server,
         remap: {
             dds: {
-                topic: ArmMotorsService,
+                topic: ArmMotors_Service,
             },
             ros2: {
                 request_type: "ap_custom_services/ArmMotors:request",
