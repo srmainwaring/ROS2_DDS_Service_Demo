@@ -1,0 +1,10 @@
+struct AddTwoInts_Request
+{
+    int64 a;
+    int64 b;
+};
+
+struct AddTwoInts_Reply
+{
+    int64 sum;
+};
