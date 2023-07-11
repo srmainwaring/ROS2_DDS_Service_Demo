@@ -1,0 +1,9 @@
+struct ArmMotorsInt64_Request
+{
+    int64 arm;
+};
+
+struct ArmMotorsInt64_Reply
+{
+    int64 result;
+};
