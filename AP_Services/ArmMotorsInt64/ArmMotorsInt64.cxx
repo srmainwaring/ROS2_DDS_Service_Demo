@@ -34,15 +34,15 @@ using namespace eprosima::fastcdr::exception;
 
 #include <utility>
 
-#define ArmMotorsInt64_Request_max_cdr_typesize 8ULL;
+#define ArmMotorsInt64_Request_max_cdr_typesize 1ULL;
 #define ArmMotorsInt64_Reply_max_cdr_typesize 8ULL;
 #define ArmMotorsInt64_Request_max_key_cdr_typesize 0ULL;
 #define ArmMotorsInt64_Reply_max_key_cdr_typesize 0ULL;
 
 ArmMotorsInt64_Request::ArmMotorsInt64_Request()
 {
-    // long long m_arm
-    m_arm = 0;
+    // boolean m_arm
+    m_arm = false;
 
 }
 
@@ -108,7 +108,7 @@ size_t ArmMotorsInt64_Request::getCdrSerializedSize(
     size_t initial_alignment = current_alignment;
 
 
-    current_alignment += 8 + eprosima::fastcdr::Cdr::alignment(current_alignment, 8);
+    current_alignment += 1 + eprosima::fastcdr::Cdr::alignment(current_alignment, 1);
 
 
     return current_alignment - initial_alignment;
@@ -134,7 +134,7 @@ void ArmMotorsInt64_Request::deserialize(
  * @param _arm New value for member arm
  */
 void ArmMotorsInt64_Request::arm(
-        int64_t _arm)
+        bool _arm)
 {
     m_arm = _arm;
 }
@@ -143,7 +143,7 @@ void ArmMotorsInt64_Request::arm(
  * @brief This function returns the value of member arm
  * @return Value of member arm
  */
-int64_t ArmMotorsInt64_Request::arm() const
+bool ArmMotorsInt64_Request::arm() const
 {
     return m_arm;
 }
@@ -152,7 +152,7 @@ int64_t ArmMotorsInt64_Request::arm() const
  * @brief This function returns a reference to member arm
  * @return Reference to member arm
  */
-int64_t& ArmMotorsInt64_Request::arm()
+bool& ArmMotorsInt64_Request::arm()
 {
     return m_arm;
 }

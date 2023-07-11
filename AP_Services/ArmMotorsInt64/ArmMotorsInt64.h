@@ -128,19 +128,19 @@ public:
      * @param _arm New value for member arm
      */
     eProsima_user_DllExport void arm(
-            int64_t _arm);
+            bool _arm);
 
     /*!
      * @brief This function returns the value of member arm
      * @return Value of member arm
      */
-    eProsima_user_DllExport int64_t arm() const;
+    eProsima_user_DllExport bool arm() const;
 
     /*!
      * @brief This function returns a reference to member arm
      * @return Reference to member arm
      */
-    eProsima_user_DllExport int64_t& arm();
+    eProsima_user_DllExport bool& arm();
 
 
     /*!
@@ -202,7 +202,7 @@ public:
 
 private:
 
-    int64_t m_arm;
+    bool m_arm;
 
 };
 /*!

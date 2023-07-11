@@ -30,8 +30,8 @@ void on_request(
     (void) length;
     (void) args;
 
-    int64_t arm;
-    ucdr_deserialize_int64_t(ub, &arm);
+    bool arm;
+    ucdr_deserialize_bool(ub, &arm);
 
     if (arm)
     {
@@ -45,7 +45,7 @@ void on_request(
     int64_t result = 0;
     if (isArmable)
     {
-        result = arm;
+        result = arm ? 1 : 0;
     }
     else
     {

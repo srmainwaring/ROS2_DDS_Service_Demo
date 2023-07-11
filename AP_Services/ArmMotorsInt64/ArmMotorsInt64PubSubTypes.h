@@ -50,7 +50,7 @@ namespace detail {
 
     struct ArmMotorsInt64_Request_f
     {
-        typedef int64_t ArmMotorsInt64_Request::* type;
+        typedef bool ArmMotorsInt64_Request::* type;
         friend constexpr type get(
                 ArmMotorsInt64_Request_f);
     };
@@ -132,7 +132,7 @@ private:
 
     static constexpr bool is_plain_impl()
     {
-        return 8ULL == (detail::ArmMotorsInt64_Request_offset_of<ArmMotorsInt64_Request, detail::ArmMotorsInt64_Request_f>() + sizeof(int64_t));
+        return 1ULL == (detail::ArmMotorsInt64_Request_offset_of<ArmMotorsInt64_Request, detail::ArmMotorsInt64_Request_f>() + sizeof(bool));
 
     }};
 

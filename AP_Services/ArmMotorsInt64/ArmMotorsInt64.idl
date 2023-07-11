@@ -1,6 +1,6 @@
 struct ArmMotorsInt64_Request
 {
-    int64 arm;
+    boolean arm;
 };
 
 struct ArmMotorsInt64_Reply

@@ -243,7 +243,7 @@ void ArmMotorsInt64_Service::runThread(
 
     if (samples == 0)
     {
-        int64_t arm = 0;
+        bool arm = false;
         while (!stop_)
         {
             ArmMotorsInt64_Request request;
