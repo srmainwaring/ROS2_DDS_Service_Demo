@@ -52,7 +52,7 @@ void on_request(
         result = false;
     }
 
-    uint8_t reply_buffer[8] = {
+    uint8_t reply_buffer[1] = {
         0
     };
     ucdrBuffer reply_ub;
