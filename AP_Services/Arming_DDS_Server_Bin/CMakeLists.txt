@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
-project("ap_services_bin")
+project("arm_motors_bin")
 
 # Find requirements
 find_package(microcdr REQUIRED)

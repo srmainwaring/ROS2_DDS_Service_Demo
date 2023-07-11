@@ -1,7 +1,7 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
-project("ap_services")
+project("arm_motors")
 
 # Find requirements
 find_package(fastcdr REQUIRED)
