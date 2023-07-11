@@ -35,7 +35,7 @@ ArmMotorsSubscriber::ArmMotorsSubscriber()
     , subscriber_(nullptr)
     , topic_(nullptr)
     , reader_(nullptr)
-    , type_(new ArmMotors_ResponsePubSubType())
+    , type_(new ArmMotors_ReplyPubSubType())
 {
 }
 
@@ -124,7 +124,7 @@ void ArmMotorsSubscriber::SubListener::on_data_available(
         DataReader* reader)
 {
     // Take data
-    ArmMotors_Response st;
+    ArmMotors_Reply st;
     SampleInfo info;
 
     if (reader->take_next_sample(&st, &info) == ReturnCode_t::RETCODE_OK)

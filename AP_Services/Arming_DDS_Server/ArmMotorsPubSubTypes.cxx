@@ -168,20 +168,20 @@ bool ArmMotors_RequestPubSubType::getKey(
     return true;
 }
 
-ArmMotors_ResponsePubSubType::ArmMotors_ResponsePubSubType()
+ArmMotors_ReplyPubSubType::ArmMotors_ReplyPubSubType()
 {
-    setName("ArmMotors_Response");
-    auto type_size = ArmMotors_Response::getMaxCdrSerializedSize();
+    setName("ArmMotors_Reply");
+    auto type_size = ArmMotors_Reply::getMaxCdrSerializedSize();
     type_size += eprosima::fastcdr::Cdr::alignment(type_size, 4); /* possible submessage alignment */
     m_typeSize = static_cast<uint32_t>(type_size) + 4; /*encapsulation*/
-    m_isGetKeyDefined = ArmMotors_Response::isKeyDefined();
-    size_t keyLength = ArmMotors_Response::getKeyMaxCdrSerializedSize() > 16 ?
-            ArmMotors_Response::getKeyMaxCdrSerializedSize() : 16;
+    m_isGetKeyDefined = ArmMotors_Reply::isKeyDefined();
+    size_t keyLength = ArmMotors_Reply::getKeyMaxCdrSerializedSize() > 16 ?
+            ArmMotors_Reply::getKeyMaxCdrSerializedSize() : 16;
     m_keyBuffer = reinterpret_cast<unsigned char*>(malloc(keyLength));
     memset(m_keyBuffer, 0, keyLength);
 }
 
-ArmMotors_ResponsePubSubType::~ArmMotors_ResponsePubSubType()
+ArmMotors_ReplyPubSubType::~ArmMotors_ReplyPubSubType()
 {
     if (m_keyBuffer != nullptr)
     {
@@ -189,11 +189,11 @@ ArmMotors_ResponsePubSubType::~ArmMotors_ResponsePubSubType()
     }
 }
 
-bool ArmMotors_ResponsePubSubType::serialize(
+bool ArmMotors_ReplyPubSubType::serialize(
         void* data,
         SerializedPayload_t* payload)
 {
-    ArmMotors_Response* p_type = static_cast<ArmMotors_Response*>(data);
+    ArmMotors_Reply* p_type = static_cast<ArmMotors_Reply*>(data);
 
     // Object that manages the raw buffer.
     eprosima::fastcdr::FastBuffer fastbuffer(reinterpret_cast<char*>(payload->data), payload->max_size);
@@ -218,14 +218,14 @@ bool ArmMotors_ResponsePubSubType::serialize(
     return true;
 }
 
-bool ArmMotors_ResponsePubSubType::deserialize(
+bool ArmMotors_ReplyPubSubType::deserialize(
         SerializedPayload_t* payload,
         void* data)
 {
     try
     {
         // Convert DATA to pointer of your type
-        ArmMotors_Response* p_type = static_cast<ArmMotors_Response*>(data);
+        ArmMotors_Reply* p_type = static_cast<ArmMotors_Reply*>(data);
 
         // Object that manages the raw buffer.
         eprosima::fastcdr::FastBuffer fastbuffer(reinterpret_cast<char*>(payload->data), payload->length);
@@ -248,28 +248,28 @@ bool ArmMotors_ResponsePubSubType::deserialize(
     return true;
 }
 
-std::function<uint32_t()> ArmMotors_ResponsePubSubType::getSerializedSizeProvider(
+std::function<uint32_t()> ArmMotors_ReplyPubSubType::getSerializedSizeProvider(
         void* data)
 {
     return [data]() -> uint32_t
            {
-               return static_cast<uint32_t>(type::getCdrSerializedSize(*static_cast<ArmMotors_Response*>(data))) +
+               return static_cast<uint32_t>(type::getCdrSerializedSize(*static_cast<ArmMotors_Reply*>(data))) +
                       4u /*encapsulation*/;
            };
 }
 
-void* ArmMotors_ResponsePubSubType::createData()
+void* ArmMotors_ReplyPubSubType::createData()
 {
-    return reinterpret_cast<void*>(new ArmMotors_Response());
+    return reinterpret_cast<void*>(new ArmMotors_Reply());
 }
 
-void ArmMotors_ResponsePubSubType::deleteData(
+void ArmMotors_ReplyPubSubType::deleteData(
         void* data)
 {
-    delete(reinterpret_cast<ArmMotors_Response*>(data));
+    delete(reinterpret_cast<ArmMotors_Reply*>(data));
 }
 
-bool ArmMotors_ResponsePubSubType::getKey(
+bool ArmMotors_ReplyPubSubType::getKey(
         void* data,
         InstanceHandle_t* handle,
         bool force_md5)
@@ -279,16 +279,16 @@ bool ArmMotors_ResponsePubSubType::getKey(
         return false;
     }
 
-    ArmMotors_Response* p_type = static_cast<ArmMotors_Response*>(data);
+    ArmMotors_Reply* p_type = static_cast<ArmMotors_Reply*>(data);
 
     // Object that manages the raw buffer.
     eprosima::fastcdr::FastBuffer fastbuffer(reinterpret_cast<char*>(m_keyBuffer),
-            ArmMotors_Response::getKeyMaxCdrSerializedSize());
+            ArmMotors_Reply::getKeyMaxCdrSerializedSize());
 
     // Object that serializes the data.
     eprosima::fastcdr::Cdr ser(fastbuffer, eprosima::fastcdr::Cdr::BIG_ENDIANNESS);
     p_type->serializeKey(ser);
-    if (force_md5 || ArmMotors_Response::getKeyMaxCdrSerializedSize() > 16)
+    if (force_md5 || ArmMotors_Reply::getKeyMaxCdrSerializedSize() > 16)
     {
         m_md5.init();
         m_md5.update(m_keyBuffer, static_cast<unsigned int>(ser.getSerializedDataLength()));

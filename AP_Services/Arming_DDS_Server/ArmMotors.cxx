@@ -35,9 +35,9 @@ using namespace eprosima::fastcdr::exception;
 #include <utility>
 
 #define ArmMotors_Request_max_cdr_typesize 1ULL;
-#define ArmMotors_Response_max_cdr_typesize 1ULL;
+#define ArmMotors_Reply_max_cdr_typesize 1ULL;
 #define ArmMotors_Request_max_key_cdr_typesize 0ULL;
-#define ArmMotors_Response_max_key_cdr_typesize 0ULL;
+#define ArmMotors_Reply_max_key_cdr_typesize 0ULL;
 
 ArmMotors_Request::ArmMotors_Request()
 {
@@ -178,40 +178,31 @@ void ArmMotors_Request::serializeKey(
 }
 
 
-ArmMotors_Response::ArmMotors_Response()
+ArmMotors_Reply::ArmMotors_Reply()
 {
     // boolean m_result
     m_result = false;
 
 }
 
-ArmMotors_Response::~ArmMotors_Response()
+ArmMotors_Reply::~ArmMotors_Reply()
 {
 }
 
-ArmMotors_Response::ArmMotors_Response(
-        const ArmMotors_Response& x)
-{
-    m_result = x.m_result;
-}
-
-ArmMotors_Response::ArmMotors_Response(
-        ArmMotors_Response&& x) noexcept 
+ArmMotors_Reply::ArmMotors_Reply(
+        const ArmMotors_Reply& x)
 {
     m_result = x.m_result;
 }
 
-ArmMotors_Response& ArmMotors_Response::operator =(
-        const ArmMotors_Response& x)
+ArmMotors_Reply::ArmMotors_Reply(
+        ArmMotors_Reply&& x) noexcept 
 {
-
     m_result = x.m_result;
-
-    return *this;
 }
 
-ArmMotors_Response& ArmMotors_Response::operator =(
-        ArmMotors_Response&& x) noexcept
+ArmMotors_Reply& ArmMotors_Reply::operator =(
+        const ArmMotors_Reply& x)
 {
 
     m_result = x.m_result;
@@ -219,28 +210,37 @@ ArmMotors_Response& ArmMotors_Response::operator =(
     return *this;
 }
 
-bool ArmMotors_Response::operator ==(
-        const ArmMotors_Response& x) const
+ArmMotors_Reply& ArmMotors_Reply::operator =(
+        ArmMotors_Reply&& x) noexcept
+{
+
+    m_result = x.m_result;
+
+    return *this;
+}
+
+bool ArmMotors_Reply::operator ==(
+        const ArmMotors_Reply& x) const
 {
 
     return (m_result == x.m_result);
 }
 
-bool ArmMotors_Response::operator !=(
-        const ArmMotors_Response& x) const
+bool ArmMotors_Reply::operator !=(
+        const ArmMotors_Reply& x) const
 {
     return !(*this == x);
 }
 
-size_t ArmMotors_Response::getMaxCdrSerializedSize(
+size_t ArmMotors_Reply::getMaxCdrSerializedSize(
         size_t current_alignment)
 {
     static_cast<void>(current_alignment);
-    return ArmMotors_Response_max_cdr_typesize;
+    return ArmMotors_Reply_max_cdr_typesize;
 }
 
-size_t ArmMotors_Response::getCdrSerializedSize(
-        const ArmMotors_Response& data,
+size_t ArmMotors_Reply::getCdrSerializedSize(
+        const ArmMotors_Reply& data,
         size_t current_alignment)
 {
     (void)data;
@@ -253,7 +253,7 @@ size_t ArmMotors_Response::getCdrSerializedSize(
     return current_alignment - initial_alignment;
 }
 
-void ArmMotors_Response::serialize(
+void ArmMotors_Reply::serialize(
         eprosima::fastcdr::Cdr& scdr) const
 {
 
@@ -261,7 +261,7 @@ void ArmMotors_Response::serialize(
 
 }
 
-void ArmMotors_Response::deserialize(
+void ArmMotors_Reply::deserialize(
         eprosima::fastcdr::Cdr& dcdr)
 {
 
@@ -272,7 +272,7 @@ void ArmMotors_Response::deserialize(
  * @brief This function sets a value in member result
  * @param _result New value for member result
  */
-void ArmMotors_Response::result(
+void ArmMotors_Reply::result(
         bool _result)
 {
     m_result = _result;
@@ -282,7 +282,7 @@ void ArmMotors_Response::result(
  * @brief This function returns the value of member result
  * @return Value of member result
  */
-bool ArmMotors_Response::result() const
+bool ArmMotors_Reply::result() const
 {
     return m_result;
 }
@@ -291,26 +291,26 @@ bool ArmMotors_Response::result() const
  * @brief This function returns a reference to member result
  * @return Reference to member result
  */
-bool& ArmMotors_Response::result()
+bool& ArmMotors_Reply::result()
 {
     return m_result;
 }
 
 
 
-size_t ArmMotors_Response::getKeyMaxCdrSerializedSize(
+size_t ArmMotors_Reply::getKeyMaxCdrSerializedSize(
         size_t current_alignment)
 {
     static_cast<void>(current_alignment);
-    return ArmMotors_Response_max_key_cdr_typesize;
+    return ArmMotors_Reply_max_key_cdr_typesize;
 }
 
-bool ArmMotors_Response::isKeyDefined()
+bool ArmMotors_Reply::isKeyDefined()
 {
     return false;
 }
 
-void ArmMotors_Response::serializeKey(
+void ArmMotors_Reply::serializeKey(
         eprosima::fastcdr::Cdr& scdr) const
 {
     (void) scdr;

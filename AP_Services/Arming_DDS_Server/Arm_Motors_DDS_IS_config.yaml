@@ -6,7 +6,7 @@ types:
                 boolean arm;
             };
 
-            struct ArmMotors_Response
+            struct ArmMotors_Reply
             {
                 boolean result;
             };
@@ -22,7 +22,7 @@ routes:
 services:
     arm_motors: {
         request_type: ArmMotors_Request,
-        reply_type: ArmMotors_Response,
+        reply_type: ArmMotors_Reply,
         route: dds_server,
         remap: {
             dds: {

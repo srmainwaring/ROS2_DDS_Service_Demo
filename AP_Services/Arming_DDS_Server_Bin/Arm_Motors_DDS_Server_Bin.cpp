@@ -118,7 +118,7 @@ int main(
     };
     
     replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
-    uint16_t replier_req = uxr_buffer_create_replier_bin(&session,reliable_out,replier_id,participant_id,"ArmMotors_Service","ArmMotors_Request","ArmMotors_Response","ArmMotors_Service_Request","ArmMotors_Service_Reply",qos,UXR_REPLACE);
+    uint16_t replier_req = uxr_buffer_create_replier_bin(&session,reliable_out,replier_id,participant_id,"ArmMotors_Service","ArmMotors_Request","ArmMotors_Reply","ArmMotors_Service_Request","ArmMotors_Service_Reply",qos,UXR_REPLACE);
     
     // Send create entities message and wait its status
     uint8_t status[2];

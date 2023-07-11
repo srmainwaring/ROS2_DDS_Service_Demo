@@ -27,7 +27,7 @@ ArmMotors_Service::ArmMotors_Service(
     , service_name_(service_name)
     , participant_factory_(fastdds::dds::DomainParticipantFactory::get_instance())
     , tsType_req_(new ArmMotors_RequestPubSubType())
-    , tsType_rep_(new ArmMotors_ResponsePubSubType())
+    , tsType_rep_(new ArmMotors_ReplyPubSubType())
     , server_(server)
     , stop_(false)
     , matched_mutex_()
@@ -152,7 +152,7 @@ ArmMotors_Service::~ArmMotors_Service()
     participant_factory_->delete_participant(participant_);
 }
 
-std::future<ArmMotors_Response> ArmMotors_Service::request(
+std::future<ArmMotors_Reply> ArmMotors_Service::request(
         ArmMotors_Request& request)
 {
     if (!server_)
@@ -161,7 +161,7 @@ std::future<ArmMotors_Response> ArmMotors_Service::request(
 
         datawriter_->write(static_cast<void*>(&request));
         delete promise_;
-        promise_ = new std::promise<ArmMotors_Response>();
+        promise_ = new std::promise<ArmMotors_Reply>();
 
         return promise_->get_future();
     }
@@ -298,7 +298,7 @@ void ArmMotors_Service::RequestListener::on_data_available(
 {
     fastdds::dds::SampleInfo info;
     ArmMotors_Request request;
-    ArmMotors_Response response;
+    ArmMotors_Reply response;
 
     if (fastrtps::types::ReturnCode_t::RETCODE_OK ==
             reader->take_next_sample(&request, &info))
@@ -348,7 +348,7 @@ void ArmMotors_Service::ReplyListener::on_data_available(
     std::unique_lock<std::mutex> lock(service_->mutex_);
 
     fastdds::dds::SampleInfo info;
-    ArmMotors_Response response;
+    ArmMotors_Reply response;
 
     if (fastrtps::types::ReturnCode_t::RETCODE_OK ==
             reader->take_next_sample(&response, &info))

@@ -59,7 +59,7 @@ public:
     ~ArmMotors_Service();
 
     // Perform a request
-    std::future<ArmMotors_Response> request(
+    std::future<ArmMotors_Reply> request(
             ArmMotors_Request& request);
 
     // Request a specific number of times
@@ -93,7 +93,7 @@ private:
     fastdds::dds::TypeSupport tsType_req_;
     fastdds::dds::TypeSupport tsType_rep_;
 
-    std::promise<ArmMotors_Response>* promise_ = nullptr;
+    std::promise<ArmMotors_Reply>* promise_ = nullptr;
     bool server_;
     bool stop_;
     std::mutex matched_mutex_;

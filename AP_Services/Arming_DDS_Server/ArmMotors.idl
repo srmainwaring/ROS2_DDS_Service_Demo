@@ -3,7 +3,7 @@ struct ArmMotors_Request
     boolean arm;
 };
 
-struct ArmMotors_Response
+struct ArmMotors_Reply
 {
     boolean result;
 };

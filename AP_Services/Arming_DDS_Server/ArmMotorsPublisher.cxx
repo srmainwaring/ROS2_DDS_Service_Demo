@@ -39,7 +39,7 @@ ArmMotorsPublisher::ArmMotorsPublisher()
     , publisher_(nullptr)
     , topic_(nullptr)
     , writer_(nullptr)
-    , type_(new ArmMotors_ResponsePubSubType())
+    , type_(new ArmMotors_ReplyPubSubType())
 {
 }
 
@@ -100,7 +100,7 @@ bool ArmMotorsPublisher::init()
         return false;
     }
 
-    std::cout << "ArmMotors_Response DataWriter created." << std::endl;
+    std::cout << "ArmMotors_Reply DataWriter created." << std::endl;
     return true;
 }
 
@@ -127,7 +127,7 @@ void ArmMotorsPublisher::PubListener::on_publication_matched(
 
 void ArmMotorsPublisher::run()
 {
-    std::cout << "ArmMotors_Response DataWriter waiting for DataReaders." << std::endl;
+    std::cout << "ArmMotors_Reply DataWriter waiting for DataReaders." << std::endl;
     while (listener_.matched == 0)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(250)); // Sleep 250 ms
@@ -135,7 +135,7 @@ void ArmMotorsPublisher::run()
 
     // Publication code
 
-    ArmMotors_Response st;
+    ArmMotors_Reply st;
 
     /* Initialize your structure here */
 

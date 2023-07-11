@@ -206,64 +206,64 @@ private:
 
 };
 /*!
- * @brief This class represents the structure ArmMotors_Response defined by the user in the IDL file.
+ * @brief This class represents the structure ArmMotors_Reply defined by the user in the IDL file.
  * @ingroup ArmMotors
  */
-class ArmMotors_Response
+class ArmMotors_Reply
 {
 public:
 
     /*!
      * @brief Default constructor.
      */
-    eProsima_user_DllExport ArmMotors_Response();
+    eProsima_user_DllExport ArmMotors_Reply();
 
     /*!
      * @brief Default destructor.
      */
-    eProsima_user_DllExport ~ArmMotors_Response();
+    eProsima_user_DllExport ~ArmMotors_Reply();
 
     /*!
      * @brief Copy constructor.
-     * @param x Reference to the object ArmMotors_Response that will be copied.
+     * @param x Reference to the object ArmMotors_Reply that will be copied.
      */
-    eProsima_user_DllExport ArmMotors_Response(
-            const ArmMotors_Response& x);
+    eProsima_user_DllExport ArmMotors_Reply(
+            const ArmMotors_Reply& x);
 
     /*!
      * @brief Move constructor.
-     * @param x Reference to the object ArmMotors_Response that will be copied.
+     * @param x Reference to the object ArmMotors_Reply that will be copied.
      */
-    eProsima_user_DllExport ArmMotors_Response(
-            ArmMotors_Response&& x) noexcept;
+    eProsima_user_DllExport ArmMotors_Reply(
+            ArmMotors_Reply&& x) noexcept;
 
     /*!
      * @brief Copy assignment.
-     * @param x Reference to the object ArmMotors_Response that will be copied.
+     * @param x Reference to the object ArmMotors_Reply that will be copied.
      */
-    eProsima_user_DllExport ArmMotors_Response& operator =(
-            const ArmMotors_Response& x);
+    eProsima_user_DllExport ArmMotors_Reply& operator =(
+            const ArmMotors_Reply& x);
 
     /*!
      * @brief Move assignment.
-     * @param x Reference to the object ArmMotors_Response that will be copied.
+     * @param x Reference to the object ArmMotors_Reply that will be copied.
      */
-    eProsima_user_DllExport ArmMotors_Response& operator =(
-            ArmMotors_Response&& x) noexcept;
+    eProsima_user_DllExport ArmMotors_Reply& operator =(
+            ArmMotors_Reply&& x) noexcept;
 
     /*!
      * @brief Comparison operator.
-     * @param x ArmMotors_Response object to compare.
+     * @param x ArmMotors_Reply object to compare.
      */
     eProsima_user_DllExport bool operator ==(
-            const ArmMotors_Response& x) const;
+            const ArmMotors_Reply& x) const;
 
     /*!
      * @brief Comparison operator.
-     * @param x ArmMotors_Response object to compare.
+     * @param x ArmMotors_Reply object to compare.
      */
     eProsima_user_DllExport bool operator !=(
-            const ArmMotors_Response& x) const;
+            const ArmMotors_Reply& x) const;
 
     /*!
      * @brief This function sets a value in member result
@@ -301,7 +301,7 @@ public:
      * @return Serialized size.
      */
     eProsima_user_DllExport static size_t getCdrSerializedSize(
-            const ArmMotors_Response& data,
+            const ArmMotors_Reply& data,
             size_t current_alignment = 0);
 
 

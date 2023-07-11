@@ -124,7 +124,7 @@ int main(
             "<replier profile_name=\"ArmMotors_Replier\""
             "service_name=\"ArmMotors_Service\""
             "request_type=\"ArmMotors_Request\""
-            "reply_type=\"ArmMotors_Response\">"
+            "reply_type=\"ArmMotors_Reply\">"
             "</replier>"
             "</dds>";
     uint16_t replier_req = uxr_buffer_create_replier_xml(&session, reliable_out, replier_id, participant_id,

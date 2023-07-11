@@ -140,7 +140,7 @@ private:
 namespace detail {
 
     template<typename Tag, typename Tag::type M>
-    struct ArmMotors_Response_rob
+    struct ArmMotors_Reply_rob
     {
         friend constexpr typename Tag::type get(
                 Tag)
@@ -149,35 +149,35 @@ namespace detail {
         }
     };
 
-    struct ArmMotors_Response_f
+    struct ArmMotors_Reply_f
     {
-        typedef bool ArmMotors_Response::* type;
+        typedef bool ArmMotors_Reply::* type;
         friend constexpr type get(
-                ArmMotors_Response_f);
+                ArmMotors_Reply_f);
     };
 
-    template struct ArmMotors_Response_rob<ArmMotors_Response_f, &ArmMotors_Response::m_result>;
+    template struct ArmMotors_Reply_rob<ArmMotors_Reply_f, &ArmMotors_Reply::m_result>;
 
     template <typename T, typename Tag>
-    inline size_t constexpr ArmMotors_Response_offset_of() {
+    inline size_t constexpr ArmMotors_Reply_offset_of() {
         return ((::size_t) &reinterpret_cast<char const volatile&>((((T*)0)->*get(Tag()))));
     }
 }
 #endif
 
 /*!
- * @brief This class represents the TopicDataType of the type ArmMotors_Response defined by the user in the IDL file.
+ * @brief This class represents the TopicDataType of the type ArmMotors_Reply defined by the user in the IDL file.
  * @ingroup ArmMotors
  */
-class ArmMotors_ResponsePubSubType : public eprosima::fastdds::dds::TopicDataType
+class ArmMotors_ReplyPubSubType : public eprosima::fastdds::dds::TopicDataType
 {
 public:
 
-    typedef ArmMotors_Response type;
+    typedef ArmMotors_Reply type;
 
-    eProsima_user_DllExport ArmMotors_ResponsePubSubType();
+    eProsima_user_DllExport ArmMotors_ReplyPubSubType();
 
-    eProsima_user_DllExport virtual ~ArmMotors_ResponsePubSubType() override;
+    eProsima_user_DllExport virtual ~ArmMotors_ReplyPubSubType() override;
 
     eProsima_user_DllExport virtual bool serialize(
             void* data,
@@ -220,7 +220,7 @@ public:
     eProsima_user_DllExport inline bool construct_sample(
             void* memory) const override
     {
-        new (memory) ArmMotors_Response();
+        new (memory) ArmMotors_Reply();
         return true;
     }
 
@@ -233,7 +233,7 @@ private:
 
     static constexpr bool is_plain_impl()
     {
-        return 1ULL == (detail::ArmMotors_Response_offset_of<ArmMotors_Response, detail::ArmMotors_Response_f>() + sizeof(bool));
+        return 1ULL == (detail::ArmMotors_Reply_offset_of<ArmMotors_Reply, detail::ArmMotors_Reply_f>() + sizeof(bool));
 
     }};
 
