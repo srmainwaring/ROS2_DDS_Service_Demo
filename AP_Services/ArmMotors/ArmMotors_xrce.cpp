@@ -17,13 +17,13 @@ static uxrObjectId replier_id;
 bool isArmable = true;
 
 void on_request(
-        uxrSession* session,
-        uxrObjectId object_id,
-        uint16_t request_id,
-        SampleIdentity* sample_id,
-        ucdrBuffer* ub,
-        uint16_t length,
-        void* args)
+    uxrSession* session,
+    uxrObjectId object_id,
+    uint16_t request_id,
+    SampleIdentity* sample_id,
+    ucdrBuffer* ub,
+    uint16_t length,
+    void* args)
 {
     (void) object_id;
     (void) request_id;
@@ -31,48 +31,56 @@ void on_request(
     (void) args;
 
     bool arm;
-    ucdr_deserialize_bool(ub,&arm);
+    ucdr_deserialize_bool(ub, &arm);
 
-    if (arm){
-        printf("Request recieved for Arming \n");
-    }else{
-        printf("Request recieved for Disarming \n");
+    if (arm)
+    {
+        printf("Request received for Arming.\n");
     }
+    else
+    {
+        printf("Request received for Disarming.\n");
+    }
+
+    bool result = false;
+    if (isArmable)
+    {
+        result = arm;
+    }
+    else
+    {
+        result = false;
+    }
+
     uint8_t reply_buffer[8] = {
         0
     };
-    
     ucdrBuffer reply_ub;
-    
-    bool result = false;
-    if(isArmable){
-        result = arm;
-    }else{
-        result = false;
-    }
-    
     ucdr_init_buffer(&reply_ub, reply_buffer, sizeof(reply_buffer));
-    ucdr_serialize_bool(&reply_ub,result);
+    ucdr_serialize_bool(&reply_ub, result);
 
-    uxr_buffer_reply(session, reliable_out, replier_id, sample_id, reply_buffer, sizeof(reply_buffer));
+    uxr_buffer_reply(session, reliable_out, replier_id, sample_id,
+        reply_buffer, sizeof(reply_buffer));
 
-    if(result){
-        printf("Reply : Armed \n");
-    }else{
-        printf("Reply : Disarmed \n");
+    if(result)
+    {
+        printf("Reply : Armed.\n");
     }
-
+    else
+    {
+        printf("Reply : Disarmed.\n");
+    }
 }
 
 int main(
-        int args,
-        char** argv)
+    int args,
+    char** argv)
 {
     if (3 > args || 0 == atoi(argv[2]))
     {
         printf("usage: program [-h | --help] | ip port [armable]\n");
-        printf("usage: armable: 0 to set arming condition to false \n");
-        printf("usage: armable: 1 to set arming condition to true \n");
+        printf("usage: armable: 0 to set arming condition to false.\n");
+        printf("usage: armable: 1 to set arming condition to true.\n");
         return 0;
     }
 
@@ -101,11 +109,12 @@ int main(
 
     // Streams
     uint8_t output_reliable_stream_buffer[BUFFER_SIZE];
-    reliable_out = uxr_create_output_reliable_stream(&session, output_reliable_stream_buffer, BUFFER_SIZE,
-                    STREAM_HISTORY);
+    reliable_out = uxr_create_output_reliable_stream(
+        &session, output_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
 
     uint8_t input_reliable_stream_buffer[BUFFER_SIZE];
-    reliable_in = uxr_create_input_reliable_stream(&session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
+    reliable_in = uxr_create_input_reliable_stream(
+        &session, input_reliable_stream_buffer, BUFFER_SIZE, STREAM_HISTORY);
 
     // Create entities
     participant_id = uxr_object_id(0x01, UXR_PARTICIPANT_ID);
@@ -117,8 +126,9 @@ int main(
         "    </rtps>"
         "  </participant>"
         "</dds>";
-    uint16_t participant_req = uxr_buffer_create_participant_xml(&session, reliable_out, participant_id, 0,
-                    participant_xml, UXR_REPLACE);
+    uint16_t participant_req = uxr_buffer_create_participant_xml(
+        &session, reliable_out, participant_id, 0,
+        participant_xml, UXR_REPLACE);
 
     replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
     const char* replier_xml =
@@ -155,8 +165,9 @@ int main(
         "    </subscriber>"
         "  </replier>"
         "</dds>";
-    uint16_t replier_req = uxr_buffer_create_replier_xml(&session, reliable_out, replier_id, participant_id,
-                    replier_xml, UXR_REPLACE);
+    uint16_t replier_req = uxr_buffer_create_replier_xml(
+        &session, reliable_out, replier_id,
+        participant_id, replier_xml, UXR_REPLACE);
 
     // Send create entities message and wait its status
     uint8_t status[2];
@@ -165,19 +176,20 @@ int main(
     };
     if (!uxr_run_session_until_all_status(&session, 1000, requests, status, 2))
     {
-        printf("Error at create entities: participant: %i requester: %i\n", status[0], status[1]);
+        printf("Error at create entities: participant: %i requester: %i\n",
+            status[0], status[1]);
         return 1;
     }
 
     printf("Entities Created Successfully \n");
 
-    // Request  requests
+    // Request requests
     uxrDeliveryControl delivery_control = {
         0
     };
     delivery_control.max_samples = UXR_MAX_SAMPLES_UNLIMITED;
-    uint16_t read_data_req =
-            uxr_buffer_request_data(&session, reliable_out, replier_id, reliable_in, &delivery_control);
+    uint16_t read_data_req = uxr_buffer_request_data(
+        &session, reliable_out, replier_id, reliable_in, &delivery_control);
     (void) read_data_req;
 
     // Read request
