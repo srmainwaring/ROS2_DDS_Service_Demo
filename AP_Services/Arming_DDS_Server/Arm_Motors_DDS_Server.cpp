@@ -109,24 +109,52 @@ int main(
 
     // Create entities
     participant_id = uxr_object_id(0x01, UXR_PARTICIPANT_ID);
-    const char* participant_xml = "<dds>"
-            "<participant>"
-            "<rtps>"
-            "<name>ArmMotors_Server</name>"
-            "</rtps>"
-            "</participant>"
-            "</dds>";
+    const char* participant_xml =
+        "<dds>"
+        "  <participant>"
+        "    <rtps>"
+        "      <name>ArmMotors_Server</name>"
+        "    </rtps>"
+        "  </participant>"
+        "</dds>";
     uint16_t participant_req = uxr_buffer_create_participant_xml(&session, reliable_out, participant_id, 0,
                     participant_xml, UXR_REPLACE);
 
     replier_id = uxr_object_id(0x01, UXR_REPLIER_ID);
-    const char* replier_xml = "<dds>"
-            "<replier profile_name=\"ArmMotors_Replier\""
-            "service_name=\"ArmMotors_Service\""
-            "request_type=\"ArmMotors_Request\""
-            "reply_type=\"ArmMotors_Reply\">"
-            "</replier>"
-            "</dds>";
+    const char* replier_xml =
+        "<dds>"
+        "  <replier profile_name=\"ArmMotors_Replier\""
+        "      service_name=\"ArmMotors_Service\""
+        "      request_type=\"ArmMotors_Request\""
+        "      reply_type=\"ArmMotors_Reply\">"
+        "    <request_topic_name>ArmMotors_Service_Request</request_topic_name>"
+        "    <reply_topic_name>ArmMotors_Service_Reply</reply_topic_name>"
+        "    <publisher profile_name=\"armmotors_replier_dw\">"
+        "      <historyMemoryPolicy>DYNAMIC</historyMemoryPolicy>"
+        "      <qos>"
+        "        <reliability>"
+        "          <kind>BEST_EFFORT</kind>"
+        "        </reliability>"
+        "      </qos>"
+        "      <topic>"
+        "        <kind>NO_KEY</kind>"
+        "        <name>ArmMotors_Service_Reply</name>"
+        "        <dataType>ArmMotors_Reply</dataType>"
+        "        <historyQos>"
+        "          <kind>KEEP_LAST</kind>"
+        "          <depth>20</depth>"
+        "        </historyQos>"
+        "      </topic>"
+        "    </publisher>"
+        "    <subscriber profile_name=\"armmotors_replier_dr\">"
+        "      <topic>"
+        "        <kind>NO_KEY</kind>"
+        "        <name>ArmMotors_Service_Request</name>"
+        "        <dataType>ArmMotors_Request</dataType>"
+        "      </topic>"
+        "    </subscriber>"
+        "  </replier>"
+        "</dds>";
     uint16_t replier_req = uxr_buffer_create_replier_xml(&session, reliable_out, replier_id, participant_id,
                     replier_xml, UXR_REPLACE);
 

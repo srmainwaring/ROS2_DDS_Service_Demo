@@ -51,7 +51,7 @@ const std::string usage()
 {
     std::ostringstream help;
 
-    help << "Usage: DDSArmMotors ";
+    help << "Usage: ArmMotors ";
     help << "-m/--mode <server/client> ";
     help << "-d/--domain <UNSIGNED_INTEGER> ";
     help << "-c/--count <UNSIGNED_INTEGER> ";

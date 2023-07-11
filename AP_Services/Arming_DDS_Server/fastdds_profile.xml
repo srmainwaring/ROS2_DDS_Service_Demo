@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<profiles>
+  <participant profile_name="participant_profile">
+    <rtps>
+      <name>Ardupilot_DDS</name>
+    </rtps>
+  </participant>
+  <replier profile_name = "ArmMotors_Replier" 
+           service_name = "ArmMotors_Service" 
+           request_type = "ArmMotors_Request" 
+           reply_type = "ArmMotors_Reply">
+    <request_topic_name>ArmMotors_Service_Request</request_topic_name>
+    <reply_topic_name>ArmMotors_Service_Reply</reply_topic_name>
+    <publisher profile_name="armmotors_replier_dw">
+      <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
+      <qos>
+        <reliability>
+          <!-- <kind>RELIABLE</kind> -->
+          <kind>BEST_EFFORT</kind>
+        </reliability>
+      </qos>
+      <topic>
+        <kind>NO_KEY</kind>
+        <name>ArmMotors_Service_Reply</name>
+        <dataType>ArmMotors_Reply</dataType>
+        <historyQos>
+          <kind>KEEP_LAST</kind>
+          <depth>20</depth>
+        </historyQos>
+      </topic>
+    </publisher>
+    <subscriber profile_name="armmotors_replier_dr">
+      <topic>
+        <kind>NO_KEY</kind>
+        <name>ArmMotors_Service_Request</name>
+        <dataType>ArmMotors_Request</dataType>
+      </topic>
+    </subscriber>
+  </replier>
+</profiles>

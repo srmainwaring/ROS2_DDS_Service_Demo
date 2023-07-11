@@ -37,6 +37,11 @@ ArmMotors_Service::ArmMotors_Service(
     // Create participant
     fastdds::dds::DomainParticipantQos participant_qos = fastdds::dds::PARTICIPANT_QOS_DEFAULT;
 
+    // participant_qos.wire_protocol().builtin.readerHistoryMemoryPolicy =
+    //     eprosima::fastrtps::rtps::PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
+    // participant_qos.wire_protocol().builtin.writerHistoryMemoryPolicy =
+    //     eprosima::fastrtps::rtps::PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
+
     participant_qos.name(server ? (service_name + "_Server") : (service_name + "_Client"));
 
     participant_ = participant_factory_->create_participant(domain_id, participant_qos);
@@ -72,8 +77,15 @@ ArmMotors_Service::ArmMotors_Service(
         throw DDSMiddlewareException("Error creating publisher topic");
     }
 
+    fastdds::dds::DataWriterQos datawriter_qos = fastdds::dds::DATAWRITER_QOS_DEFAULT;
+    {
+      fastdds::dds::ReliabilityQosPolicy rel_policy;
+      rel_policy.kind = fastdds::dds::BEST_EFFORT_RELIABILITY_QOS;
+      datawriter_qos.reliability(rel_policy);
+    }
+
     datawriter_ = publisher_->create_datawriter(
-        pub_topic_, fastdds::dds::DATAWRITER_QOS_DEFAULT, this);
+        pub_topic_, datawriter_qos, this);
 
     if (!datawriter_)
     {
@@ -111,9 +123,16 @@ ArmMotors_Service::ArmMotors_Service(
     }
 
     fastdds::dds::DataReaderQos datareader_qos = fastdds::dds::DATAREADER_QOS_DEFAULT;
-    fastdds::dds::ReliabilityQosPolicy rel_policy;
-    rel_policy.kind = fastdds::dds::RELIABLE_RELIABILITY_QOS;
-    datareader_qos.reliability(rel_policy);
+    {
+      fastdds::dds::ReliabilityQosPolicy rel_policy;
+      // rel_policy.kind = fastdds::dds::RELIABLE_RELIABILITY_QOS;
+      rel_policy.kind = fastdds::dds::BEST_EFFORT_RELIABILITY_QOS;
+      datareader_qos.reliability(rel_policy);
+
+      // fastdds::dds::RTPSEndpointQos endpoint_qos;
+      // endpoint_qos.history_memory_policy = fastrtps::rtps::PREALLOCATED_WITH_REALLOC_MEMORY_MODE;
+      // datareader_qos.endpoint(endpoint_qos);
+    }
 
     datareader_ = subscriber_->create_datareader(
         sub_topic_, datareader_qos,
