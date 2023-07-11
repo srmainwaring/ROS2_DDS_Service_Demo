@@ -57,7 +57,7 @@ void on_request(
     };
     ucdrBuffer reply_ub;
     ucdr_init_buffer(&reply_ub, reply_buffer, sizeof(reply_buffer));
-    ucdr_serialize_uint64_t(&reply_ub, sum);
+    ucdr_serialize_int64_t(&reply_ub, sum);
 
     uxr_buffer_reply(session, reliable_out, replier_id, sample_id,
         reply_buffer, sizeof(reply_buffer));
