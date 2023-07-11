@@ -143,7 +143,7 @@ int main(
         "      <historyMemoryPolicy>DYNAMIC</historyMemoryPolicy>"
         "      <qos>"
         "        <reliability>"
-        "          <kind>BEST_EFFORT</kind>"
+        "          <kind>RELIABLE</kind>"
         "        </reliability>"
         "      </qos>"
         "      <topic>"

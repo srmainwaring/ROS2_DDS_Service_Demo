@@ -15,8 +15,7 @@
       <historyMemoryPolicy>PREALLOCATED_WITH_REALLOC</historyMemoryPolicy>
       <qos>
         <reliability>
-          <!-- <kind>RELIABLE</kind> -->
-          <kind>BEST_EFFORT</kind>
+          <kind>RELIABLE</kind>
         </reliability>
       </qos>
       <topic>
