@@ -8,7 +8,7 @@ find_package(microcdr REQUIRED)
 find_package(microxrcedds_client REQUIRED)
 
 add_executable(ArmMotorsBinMicro
-  Arm_Motors_DDS_Server_Bin.cpp
+  ArmMotorsBin_xrce.cpp
 )
 target_include_directories(ArmMotorsBinMicro
   PRIVATE

@@ -26,7 +26,7 @@ target_link_libraries(ArmMotors
 )
 
 add_executable(ArmMotorsMicro
-  Arm_Motors_DDS_Server.cpp
+  ArmMotors_xrce.cpp
 )
 target_include_directories(ArmMotorsMicro
   PRIVATE
