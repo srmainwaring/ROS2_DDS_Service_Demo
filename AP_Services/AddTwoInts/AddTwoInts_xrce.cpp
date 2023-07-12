@@ -60,7 +60,7 @@ void on_request(
     ucdr_serialize_int64_t(&reply_ub, sum);
 
     uxr_buffer_reply(session, reliable_out, replier_id, sample_id,
-        reply_buffer, sizeof(reply_buffer));
+        reply_buffer, sizeof(sum));
 
 #ifdef WIN32
     printf("Reply send: %I64u\n", sum);
