@@ -54,7 +54,7 @@ void on_request(
     ucdr_init_buffer(&reply_ub, reply_buffer, sizeof(reply_buffer));
     ucdr_serialize_bool(&reply_ub,result);
 
-    uxr_buffer_reply(session, reliable_out, replier_id, sample_id, reply_buffer, sizeof(reply_buffer));
+    uxr_buffer_reply(session, reliable_out, replier_id, sample_id, reply_buffer, sizeof(result));
 
     if(result){
         printf("Reply : Armed \n");
