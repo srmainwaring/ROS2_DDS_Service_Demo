@@ -27,7 +27,7 @@ services:
         route: dds_server,
         remap: {
             dds: {
-                topic: AddTwoIntsService,
+                topic: AddTwoInts_Service,
             },
             ros2: {
                 request_type: "example_interfaces/AddTwoInts:request",
